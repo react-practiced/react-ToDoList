@@ -1,23 +1,25 @@
-import logo from "./logo.svg";
 import "./App.css";
+import AddList from "./component/addList";
+import List from "./List";
 
 function App() {
+  const style = {
+    margin: "20px",
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg">
+      <div className="list-box">
+        <h1>ToDo List</h1>
+        <hr />
+        <div className="input-box">
+          <AddList />
+        </div>
+      </div>
+      <div style={style}>
+        <div className="list-box">
+          <List />
+        </div>
+      </div>
     </div>
   );
 }
