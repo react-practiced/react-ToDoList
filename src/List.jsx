@@ -1,25 +1,24 @@
 import React from "react";
 
-function User({ listTitle }) {
+function User(props) {
+  const listTitle = props.listTitle;
   return (
-    <ul>
-      <li>
-        <p>{listTitle}</p>
-        <div className="buttons">
-          <button className="success">&#10004;</button>
-          <button className="close"> X </button>
-        </div>
-      </li>
-    </ul>
+    <li>
+      <p>{listTitle}</p>
+      <div className="buttons">
+        <button className="success">&#10004;</button>
+        <button className="close"> X </button>
+      </div>
+    </li>
   );
 }
-function List({ text, id }) {
+function List({ text }) {
   return (
-    <>
-      {text.map((a) => (
-        <User listTitle={a} key={id} />
+    <ul>
+      {text.map((title, index) => (
+        <User key={index} listTitle={title} />
       ))}
-    </>
+    </ul>
   );
 }
 
