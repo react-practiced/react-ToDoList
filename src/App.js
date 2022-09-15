@@ -12,6 +12,7 @@ function App() {
   };
   const onCreate = () => {
     setList(list.concat(input));
+    setInput("");
   };
 
   const style = {
@@ -23,7 +24,7 @@ function App() {
         <h1>ToDo List</h1>
         <hr />
         <div className="input-box">
-          <AddList change={onChange} create={onCreate} />
+          <AddList change={onChange} create={onCreate} inputText={input} />
         </div>
       </div>
       <div style={style}>

@@ -67,11 +67,11 @@ ul li p {
   cursor: pointer;
   margin: 0 5px;
 }
-.success:hover {
+.buttons button.success {
   color: white;
   background: green;
 }
-.close:hover {
+.buttons button:last-child:hover {
   color: white;
   background: red;
 }
