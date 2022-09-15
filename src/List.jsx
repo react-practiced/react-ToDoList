@@ -1,16 +1,25 @@
 import React from "react";
 
-function List() {
+function User({ listTitle }) {
   return (
     <ul>
       <li>
-        <p>userlist</p>
+        <p>{listTitle}</p>
         <div className="buttons">
           <button className="success">&#10004;</button>
           <button className="close"> X </button>
         </div>
       </li>
     </ul>
+  );
+}
+function List({ text, id }) {
+  return (
+    <>
+      {text.map((a) => (
+        <User listTitle={a} key={id} />
+      ))}
+    </>
   );
 }
 
