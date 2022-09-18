@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import AddList from "./component/addList";
-import List from "./List";
+import List from "./component/List";
 
 function App() {
   const [input, setInput] = useState("");
@@ -13,8 +13,16 @@ function App() {
   const onCreate = () => {
     setList(list.concat(input));
     setInput("");
+    console.log(list);
   };
 
+  const removeList = (e) => {
+    setList(list.filter((a) => list.indexOf(a) !== e));
+
+    list.forEach((a) => {
+      console.log("listIndex: " + list.indexOf(a), "id: " + e);
+    });
+  };
   const style = {
     margin: "20px",
   };
@@ -29,7 +37,7 @@ function App() {
       </div>
       <div style={style}>
         <div className="list-box">
-          <List text={list} />
+          <List text={list} remove={removeList} />
         </div>
       </div>
     </div>
