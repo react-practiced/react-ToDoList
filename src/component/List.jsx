@@ -21,9 +21,24 @@ function User({ listTitle, remove, id }) {
     console.log(checkStts);
   };
 
+  const ModalOn = () => {
+    document.querySelector("#modal").style.display = "block";
+    console.log("hi");
+  };
+
   return (
     <li>
-      <p ref={titleRef}>{listTitle}</p>
+      <div className="modal-bg" id="modal">
+        <div className="white-box">
+          <h4>수정사항을 입력하세요</h4>
+          <hr />
+          <input type="text" placeholder={listTitle} />
+          <button className="submit">저장</button>
+        </div>
+      </div>
+      <p ref={titleRef} onClick={ModalOn}>
+        {listTitle}
+      </p>
       <div className="buttons">
         <button onClick={success}>&#10004;</button>
         <button
@@ -38,7 +53,7 @@ function User({ listTitle, remove, id }) {
   );
 }
 
-function List({ text, remove }) {
+function List({ text, remove, correction }) {
   return (
     <ul>
       {text.map((title, index) => {
