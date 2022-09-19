@@ -16,13 +16,20 @@ function App() {
     console.log(list);
   };
 
-  const removeList = (e) => {
-    setList(list.filter((a) => list.indexOf(a) !== e));
+  const removeList = (index) => {
+    setList(list.filter((_, i) => i !== index));
 
-    list.forEach((a) => {
-      console.log("listIndex: " + list.indexOf(a), "id: " + e);
-    });
+    // list.forEach((a) => {
+    //   console.log("listIndex: " + list.indexOf(a), "id: " + e);
+    // });
   };
+
+  const onCorrection = (index, value) => {
+    // map은 새로운 배열을 반환하는 함수
+    // 반복문을 돌면서 만약 index와 그 i번째 item이 같다면 새로운 value를 같지 않다면 value를 return하여 배열을 만든다.
+    setList(list.map((text, i) => (i === index ? value : text)));
+  };
+
   const style = {
     margin: "20px",
   };
@@ -37,7 +44,7 @@ function App() {
       </div>
       <div style={style}>
         <div className="list-box">
-          <List text={list} remove={removeList} />
+          <List text={list} remove={removeList} correction={onCorrection} />
         </div>
       </div>
     </div>

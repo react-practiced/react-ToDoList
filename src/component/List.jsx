@@ -1,7 +1,8 @@
-import React from "react";
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
 
-function User({ listTitle, remove, id }) {
+function User({ listTitle, remove, id, correction }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [text, setText] = useState("");
   const titleRef = useRef(null);
   let checkStts = false;
   let count = 0;
@@ -22,18 +23,32 @@ function User({ listTitle, remove, id }) {
   };
 
   const ModalOn = () => {
-    document.querySelector("#modal").style.display = "block";
-    console.log("hi");
+    setIsOpen(true);
+  };
+
+  const onCorrection = (id, text) => {
+    correction(id, text);
+    setIsOpen(false);
   };
 
   return (
     <li>
-      <div className="modal-bg" id="modal">
+      <div
+        className="modal-bg"
+        style={isOpen ? { display: "flex" } : { display: "none" }}
+      >
         <div className="white-box">
           <h4>수정사항을 입력하세요</h4>
           <hr />
-          <input type="text" placeholder={listTitle} />
-          <button className="submit">저장</button>
+          <input
+            type="text"
+            placeholder={listTitle}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <button className="submit" onClick={() => onCorrection(id, text)}>
+            저장
+          </button>
         </div>
       </div>
       <p ref={titleRef} onClick={ModalOn}>
@@ -41,13 +56,7 @@ function User({ listTitle, remove, id }) {
       </p>
       <div className="buttons">
         <button onClick={success}>&#10004;</button>
-        <button
-          onClick={() => {
-            remove(id);
-          }}
-        >
-          X
-        </button>
+        <button onClick={() => remove(id)}>X</button>
       </div>
     </li>
   );
@@ -58,7 +67,13 @@ function List({ text, remove, correction }) {
     <ul>
       {text.map((title, index) => {
         return (
-          <User key={index} listTitle={title} remove={remove} id={index} />
+          <User
+            key={index}
+            listTitle={title}
+            remove={remove}
+            id={index}
+            correction={correction}
+          />
         );
       })}
     </ul>
